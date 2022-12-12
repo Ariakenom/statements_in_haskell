@@ -64,7 +64,9 @@ The placeholder value `()` is an empty tuple. It is like void in C or None in Py
 
 To use if with our statements we write an if-expression that results in a statement. That statement can of course be a do-block.
 
+```
 main = if False then print True else print False
+```
 
 # Looping
 

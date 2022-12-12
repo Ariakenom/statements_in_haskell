@@ -209,7 +209,7 @@ First it creates a new function for each statement in a do-block. Secondly it us
 main = do {
     input1 <- getLine;
     input2 <- getLine;
-    print x;
+    print (input1 ++ input2);
 }
 ```
 
@@ -217,7 +217,7 @@ main = do {
 main = (
     bind getLine (\input1 ->
         bind getLine (\input2 ->
-            print input
+            print (input1 ++ input2)
         )
     )
 )

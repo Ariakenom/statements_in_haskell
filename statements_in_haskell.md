@@ -5,7 +5,9 @@ People who know something like Java and want a brief introduction how you intera
 
 # hello world
 
+```
 main = print "Hello world"
+```
 
 The classic! Just like in C `main` defines what the program will do. In this case `main` is a single print statement. 
 
@@ -17,13 +19,16 @@ Statements can be many different things. It can be a block of statements, which 
 
 In this post I will separate statements within a do-block using ;. Usual Haskell style uses "layout" which replaces {} and ; with indentation. The code in this post is indented so that it would work without with the {} and ; as well. 
 
+```
 main = do {
     print "hello";
     print "world";
 }
+```
 
 Since `print "world"` is a statement we could replace that with another do-block. 
 
+```
 main = do {
     print "hello";
     do {
@@ -32,21 +37,26 @@ main = do {
     };
     print "!";
 }
+```
 
 # Getting intput
 
 Inside a do block we can get a result from a statemnt using `<-`. 
 
+```
 main = do {
     print "What is your name?";
     name <- getLine;
     print ("Hello " ++ name ++ "!");
 }
+```
 
+```
 main = do {
     x <- print "what is the result of print?";
     print x; -- the placeholder value ()
 }
+```
 
 The placeholder value `()` is an empty tuple. It is like void in C or None in Python. The type of the value is also written `()`.
 
@@ -62,6 +72,7 @@ main = if False then print True else print False
 
 Putting all of the parts together we can write a interactive program.
 
+```
 main = do {
     input <- getLine;
     if input == "quit"
@@ -72,13 +83,15 @@ main = do {
             print "looping";
             main;
         };
-}
+}   
+```
 
 # A number guesser
 
 `read` parse a string into a number.
 `let x = e` is similar to `x <- e` but `e` is an expression instead of a statement. `let x = getLine` does not read a line from the user, instead `x` just becomes a different name for the statement `getLine`.
 
+```
 secret_number = 42
 
 main = do {
@@ -94,6 +107,7 @@ main = do {
         main;
         };
 }
+```
 
 # More
 
@@ -103,7 +117,9 @@ We've now built a interactive program! But there are more things to understand a
 
 `head` is a function that results in the first item from a list.
 
+```
 main = head [print "pure", print "impure"] 
+```
 
 In this example only "pure" will be printed. In most C or python both pure and impure would be printed. This is a large difference compared to other languages and is called "purity" or "no side-effects". This is sometimes said to be because Haskell is "lazy" but that's wrong, laziness is unrelated to this.
 
@@ -117,6 +133,7 @@ We can define other statements recursively like this to create different loops. 
 
 `pure ()` is a placeholder statement that does nothing.
 
+```
 main = count 0
 
 count n = do {
@@ -125,10 +142,13 @@ count n = do {
     then pure ()
     else count (n+1);
 }
+```
 
 Just so Haskell doesn't seem too terrible I'll mention that there are shorter ways to write this using functions I haven't explained.
 
+```
 main = for [0..100] print
+```
 
 # Lambda
 
@@ -140,12 +160,15 @@ The model Haskell uses to express a block of statements is called a monad. The m
 
 First it creates a new function for each statement in a do-block. Secondly it uses a combining function `>>=`, called "bind", between each statement. Bind takes two arguments `bind x y`.  `x` is a statement that produces some result. `y` is a function that takes `x`s result as an argument and produces another statement. The job of bind is to combine `x` and `y`.
 
+```
 main = do {
     input1 <- getLine;
     input2 <- getLine;
     print x;
 }
+```
 
+```
 main = (
     bind getLine (\input1 ->
         bind getLine (\input2 ->
@@ -153,5 +176,6 @@ main = (
         )
     )
 )
+```
 
 The model is used for many different things like parsing or, in our case, to describe how a program interacts with the outside world.

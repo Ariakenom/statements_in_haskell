@@ -130,6 +130,11 @@ As we've seen a statement can be built out of several statements using do-blocks
 
 So in the code above only the first item of the list is defined to be a part of main. The second item is a part of an expression that computes what goes into main but, since it isn't the result, it is not a part of the statement `main`.
 
+```
+myIf condition ifTrue ifFalse = if condition then ifTrue else ifFalse
+```
+
+
 # Defining a function
 
 We can define other statements recursively like this to create different loops. And we can define a function that results in a statement to carry state between the iterations.

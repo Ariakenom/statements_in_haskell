@@ -97,8 +97,8 @@ main = do {
 secret_number = 42
 
 main = do {
-    let myGetLine = getline; 
-    input_string <- getLine;
+    let myGetLine = getLine; 
+    input_string <- myGetLine;
     let input_int = read input_string;
     if input_int == secret_number;
     then 

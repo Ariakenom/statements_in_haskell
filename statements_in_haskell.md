@@ -154,11 +154,48 @@ count n = do {
 
 Just so Haskell doesn't seem too terrible I'll mention that there are shorter ways to write this using functions I haven't explained.
 
+
 ```
-main = for [0..100] print
+myIf condition ifTrue ifFalse = if condition then ifTrue else ifFalse
+```
+
+```
+myIf = \condition ifTrue ifFalse -> if condition then ifTrue else ifFalse
 ```
 
 # Lambda
+
+```
+main = count 0
+
+count n = do {
+    print n;
+    if n == 100
+    then pure ()
+    else count (n+1);
+}
+```
+
+
+```
+count n = do {
+    print n;
+    if n == 100
+    then pure ()
+    else count (n+1);
+}
+```
+
+```
+main = count 0
+
+count = \n -> do {
+    print n;
+    if n == 100
+    then pure ()
+    else count (n+1);
+}
+```
 
 # Monad!?
 

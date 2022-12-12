@@ -72,7 +72,7 @@ main = if False then print True else print False
 
 `main` is itself a statement. We can run `main` to go back to the beginning. In C or Python this can cause an issue with the stack but that's not an issue here, even if the call isn't tail recursive.
 
-Putting all of the parts together we can write a interactive program.
+Putting all of the parts together we can write an interactive program.
 
 ```
 main = do {
@@ -90,13 +90,14 @@ main = do {
 
 # A number guesser
 
-`read` parse a string into a number.
+`read` parses a string into a number.
 `let x = e` is similar to `x <- e` but `e` is an expression instead of a statement. `let x = getLine` does not read a line from the user, instead `x` just becomes a different name for the statement `getLine`.
 
 ```
 secret_number = 42
 
 main = do {
+    let myGetLine = getline; 
     input_string <- getLine;
     let input_int = read input_string;
     if input_int == secret_number;

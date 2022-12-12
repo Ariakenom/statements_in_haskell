@@ -224,3 +224,26 @@ main = (
 ```
 
 The model is used for many different things like parsing or, in our case, to describe how a program interacts with the outside world.
+
+
+# State
+```
+function f(state) {
+    while c(state) {
+        e();
+        state = u(state);
+    }
+}
+```
+
+```
+f state= do {
+    if not (c state) 
+    then
+        pure ();
+    else do {
+        e;
+        f (u state);
+    }
+}
+```
